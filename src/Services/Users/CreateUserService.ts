@@ -1,4 +1,4 @@
-import { prismaClient } from "../../prisma/index"
+import { prismaClient } from "../../prisma/index";
 import { hash } from "bcryptjs";
 import { UserRequest } from "../../Models/interfaces/users/UserRequest";
 
