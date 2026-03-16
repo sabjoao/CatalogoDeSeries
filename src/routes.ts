@@ -8,6 +8,7 @@ import { RemoveUserController } from "./Controllers/user/RemoveUserController";
 import { ListUserController } from "./Controllers/user/ListUserController";
 import { CreateGeneroController } from "./Controllers/genero/CreateGeneroController";
 import { EditGeneroController } from "./Controllers/genero/EditGeneroController";
+import { RemoveGeneroController } from "./Controllers/genero/RemoveGeneroController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"));
@@ -25,5 +26,6 @@ router.get("/me", isAuthenticated, new ListUserController().handle);
 //Genero Routes
 router.post('/genero', isAuthenticated, new CreateGeneroController().handle);
 router.put('/genero/edit', isAuthenticated, new EditGeneroController().handle);
+router.delete('/genero/remove', isAuthenticated, new RemoveGeneroController().handle);
 
 export { router };
