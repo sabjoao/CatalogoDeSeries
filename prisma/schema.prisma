@@ -26,6 +26,7 @@ model User{
 
   serie_cad Serie[]
   genero_cad Genero[]
+  user_serie UserSerie[]
 
 
   @@map ("users")
@@ -36,9 +37,9 @@ model Serie{
   id String @id @default(uuid())
   ano Int
   nome String
-  nota Int
+  //remoção de nota
   sinopse String
-  Assistido String
+  //remoção de assistido
 
   created_at  DateTime? @default(now())
   updated_at  DateTime? @default(now())
@@ -48,6 +49,8 @@ model Serie{
 
   user User @relation(fields: [user_id], references: [id])
   user_id String
+
+  user_serie UserSerie[]
 
   @@map("Series")
 }
@@ -66,4 +69,19 @@ model Genero{
   series Serie[]
 
   @@map("generos")
+}
+
+model UserSerie{
+  id String @id @default(uuid())
+  assistido Boolean @default(false)
+  favorito Boolean @default(false)
+  nota Int?
+  
+  user User @relation(fields: [user_id], references: [id])
+  user_id String
+
+  serie Serie @relation(fields: [serie_id], references: [id])
+  serie_id String
+  
+  
 }
