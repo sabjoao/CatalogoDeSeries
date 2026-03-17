@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { DeleteGeneroRequest } from "../../Models/interfaces/Genero/DeleteGeneroRequest ";
 import { RemoveGeneroService } from "../../Services/Genero/RemoveGeneroService";
 
 class RemoveGeneroController{

@@ -29,7 +29,7 @@ model User{
   user_serie UserSerie[]
 
 
-  @@map ("users")
+  @@map("users")
 
 }
 
@@ -39,7 +39,7 @@ model Serie{
   nome String
   //remoção de nota
   sinopse String
-  //remoção de assistido
+  imagem String?
 
   created_at  DateTime? @default(now())
   updated_at  DateTime? @default(now())
@@ -82,6 +82,7 @@ model UserSerie{
 
   serie Serie @relation(fields: [serie_id], references: [id])
   serie_id String
-  
-  
+
+
+  @@map("userSerie")
 }
