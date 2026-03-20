@@ -16,6 +16,7 @@ import { ListAllSeriesController } from "./Controllers/series/ListAllSeriesContr
 import { ListSeriesByGenreController } from "./Controllers/series/ListSeriesByGenerController";
 import { UserSerieController } from "./Controllers/UserSerie/UserSerieController";
 import { ListFavoriteController } from "./Controllers/UserSerie/ListFavoriteController";
+import { ListAllGenerosController } from "./Controllers/genero/ListAllGenerosController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"));
@@ -34,6 +35,7 @@ router.get("/me", isAuthenticated, new ListUserController().handle);
 router.post('/genero', isAuthenticated, new CreateGeneroController().handle);
 router.put('/genero/edit', isAuthenticated, new EditGeneroController().handle);
 router.delete('/genero/remove', isAuthenticated, new RemoveGeneroController().handle);
+router.get('/genero/all', isAuthenticated, new ListAllGenerosController().handle);
 
 //Serie Routes
 router.post('/serie', upload.single("file"), isAuthenticated, new CreateSerieController().handle);
