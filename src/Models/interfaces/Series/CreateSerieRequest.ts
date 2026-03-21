@@ -1,6 +1,6 @@
 export interface CreateSerieRequest{
     ano: number; 
-    nome: string
+    nome: string;
     sinopse: string;
     imagem: string;
     genero_id: string;

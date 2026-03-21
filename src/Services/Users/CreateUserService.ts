@@ -32,6 +32,9 @@ class CreateUserService {
                 email: true
             }
         })
+
+                console.log("ANTES DO RETURN");
+
         return user;
     }
 }

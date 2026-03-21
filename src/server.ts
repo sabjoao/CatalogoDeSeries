@@ -6,7 +6,7 @@ import path from "path";
 import response = require("express");
 
 const app = express();
-const port = 1234;
+const port = 3000;
 
 app.use(express.json()); //receberemos e devolveremos no formato json
 app.use(cors());
@@ -26,5 +26,5 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
 })
 
 app.listen(port, () => {
-    console.log("servidor rodando na porta 1234- projeto catalogo de series")
+    console.log(`servidor rodando na porta ${port} - projeto catalogo de series`)
 })
