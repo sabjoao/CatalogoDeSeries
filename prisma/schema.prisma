@@ -83,6 +83,7 @@ model UserSerie{
   serie Serie @relation(fields: [serie_id], references: [id])
   serie_id String
 
+  @@unique([user_id, serie_id])
 
   @@map("userSerie")
 }

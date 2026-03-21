@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ListSerieByGenreService } from "../../Services/Series/ListSeriesByGener";
+import { ListSerieByGenreService } from "../../Services/Series/ListSeriesByGenerService";
 
 class ListSeriesByGenreController{
     async handle(req: Request, res: Response){

@@ -14,7 +14,9 @@ import { EditSerieController } from "./Controllers/series/EditSerieController";
 import { RemoveSerieController } from "./Controllers/series/RemoveSerieController";
 import { ListAllSeriesController } from "./Controllers/series/ListAllSeriesController";
 import { ListSeriesByGenreController } from "./Controllers/series/ListSeriesByGenerController";
-import { ListAllGeneroController } from "./Controllers/genero/ListAllGeneroController";
+import { UserSerieController } from "./Controllers/UserSerie/UserSerieController";
+import { ListFavoriteController } from "./Controllers/UserSerie/ListFavoriteController";
+import { ListAllGenerosController } from "./Controllers/genero/ListAllGenerosController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"));
@@ -33,8 +35,7 @@ router.get("/me", isAuthenticated, new ListUserController().handle);
 router.post('/genero', isAuthenticated, new CreateGeneroController().handle);
 router.put('/genero/edit', isAuthenticated, new EditGeneroController().handle);
 router.delete('/genero/remove', isAuthenticated, new RemoveGeneroController().handle);
-router.get('/genero/all', isAuthenticated, new ListAllGeneroController().handle);
-
+router.get('/genero/all', isAuthenticated, new ListAllGenerosController().handle);
 
 //Serie Routes
 router.post('/serie', upload.single("file"), isAuthenticated, new CreateSerieController().handle);
@@ -42,5 +43,10 @@ router.put('/serie/edit', upload.single("file"), isAuthenticated, new EditSerieC
 router.delete('/serie/remove', isAuthenticated, new RemoveSerieController().handle);
 router.get('/serie/all', isAuthenticated, new ListAllSeriesController().handle);
 router.get('/serie/genero', isAuthenticated, new ListSeriesByGenreController().handle);
+
+//UserSerie Routes
+router.patch('/userSerie', isAuthenticated, new UserSerieController().handle);
+router.get("/userSerie/favoritos", isAuthenticated, new ListFavoriteController().handle);
+router.get('/userSerie/assistidos', isAuthenticated, new ListFavoriteController().handle);
 
 export { router };

@@ -7,7 +7,11 @@ class ListAllSeriesService{
                 nome: true,
                 ano: true,
                 sinopse: true,
-                genero_id: true,
+                genero: {
+                    select: {
+                        nome: true
+                    }
+                },
                 imagem: true
             },
         });
