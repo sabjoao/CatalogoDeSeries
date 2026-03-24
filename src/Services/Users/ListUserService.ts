@@ -10,6 +10,7 @@ class ListUserService{
                 id:true,
                 nome: true,
                 email: true,
+                imagem: true,
             }
         })
         return user;

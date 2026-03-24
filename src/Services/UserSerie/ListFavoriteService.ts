@@ -16,7 +16,8 @@ class ListFavoriteService {
                         ano: true,
                         nome: true,
                         sinopse: true,
-                        imagem: true
+                        imagem: true,
+                        id: true,
                     }
                 }
             }

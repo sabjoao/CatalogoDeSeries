@@ -3,9 +3,10 @@ import { CreateSerieRequest } from "../../Models/interfaces/Series/CreateSerieRe
 
 class CreateSerieService {
     async execute({ ano, nome, sinopse, imagem, genero_id, user_id }: CreateSerieRequest) {
+    console.log(`${ano},${nome},${sinopse}, ${imagem}, ${genero_id}, ${user_id} `)
         const serie = await prismaClient.serie.create({
             data: {
-                ano: +ano,
+                ano: parseInt(ano),
                 nome: nome,
                 sinopse: sinopse,
                 imagem: imagem,

@@ -5,7 +5,7 @@ class ListWatchedService{
         if(!user_id){
             throw new Error("user_id inválido");
         }
-        const series = prismaClient.userSerie.findFirst({
+        const series = prismaClient.userSerie.findMany({
             where: {
                 user_id: user_id,
                 assistido: true

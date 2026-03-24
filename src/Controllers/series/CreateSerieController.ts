@@ -4,7 +4,8 @@ import { CreateSerieService } from "../../Services/Series/CreateSerieService";
 
 class CreateSerieController{
     async handle(req: Request, res: Response){
-        const {ano, nome, sinopse, imagem, genero_id, user_id}: CreateSerieRequest = req.body;
+        const {ano, nome, sinopse, genero_id}: CreateSerieRequest = req.body;
+        const user_id = req.user_id;
         const createSerieService = new CreateSerieService();
         if(!req.file){
             throw new Error("Erro ao enviar a imagem");

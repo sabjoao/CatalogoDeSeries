@@ -11,6 +11,7 @@ class ListSerieByGenreService {
                 genero_id: genero_id
             },
             select: {
+                id: true,
                 ano: true,
                 nome: true,
                 sinopse: true,

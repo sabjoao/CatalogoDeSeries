@@ -17,6 +17,8 @@ import { ListSeriesByGenreController } from "./Controllers/series/ListSeriesByGe
 import { UserSerieController } from "./Controllers/UserSerie/UserSerieController";
 import { ListFavoriteController } from "./Controllers/UserSerie/ListFavoriteController";
 import { ListAllGenerosController } from "./Controllers/genero/ListAllGenerosController";
+import { EditUserController } from "./Controllers/user/EditUserController";
+import { ListWatchedController } from "./Controllers/UserSerie/ListWatchedController";
 
 const router = Router();
 const upload = multer(uploadConfig.upload("./tmp"));
@@ -27,6 +29,7 @@ router.get("/test", (request: Request, response: Response) => {
 
 //User Routes
 router.post('/user', upload.single("file"), new CreateUserController().handle);
+router.put('/user/edit', upload.single("file"), isAuthenticated, new EditUserController().handle);
 router.post('/session', new AuthUserControler().handle);
 router.delete("/user/remove", isAuthenticated, new RemoveUserController().handle);
 router.get("/me", isAuthenticated, new ListUserController().handle);
@@ -47,6 +50,6 @@ router.get('/serie/genero', isAuthenticated, new ListSeriesByGenreController().h
 //UserSerie Routes
 router.patch('/userSerie', isAuthenticated, new UserSerieController().handle);
 router.get("/userSerie/favoritos", isAuthenticated, new ListFavoriteController().handle);
-router.get('/userSerie/assistidos', isAuthenticated, new ListFavoriteController().handle);
+router.get('/userSerie/assistidos', isAuthenticated, new ListWatchedController().handle);
 
 export { router };

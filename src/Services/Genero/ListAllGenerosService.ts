@@ -4,7 +4,8 @@ class ListAllGenerosService{
     async execute(){
         const generos = await prismaClient.genero.findMany({
             select: {
-                nome: true
+                id: true,
+                nome: true,
             },
         });
         return generos;
