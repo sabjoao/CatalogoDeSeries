@@ -1,0 +1,622 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Catálogo de Séries",
+        "description": "esta api tem como objetivo facilitar o gerenciamento de um catálogo de séries",
+        "contact": {
+            "email": "sabino.jp03@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/user": {
+            "post": {
+                "description": "criar um novo usuario",
+                "requestBody": {
+                    "description": "dados necessarios para a criacao de um novo usuario",
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestCreateUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCreateUser"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/session": {
+            "post": {
+                "description": "logar e autenticar o usuario",
+                "requestBody": {
+                    "description": "dados necessarios para o login e autenticacao do usuario",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestAuthUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseAuthUser"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/me": {
+            "get": {
+                "description": "buscar dados do usuario autenticado",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCreateUser"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/edit": {
+            "put": {
+                "description": "editar dados do usuario autenticado",
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "description": "dados necessarios para a edicao do usuario",
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestEditUser"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCreateUser"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/remove": {
+            "delete": {
+                "description": "remover o usuario autenticado",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "user_id",
+                        "in": "query",
+                        "description": "id do usuario a ser removido",
+                        "required": true,
+                        "schema": { "type": "string", "format": "uuid" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseDeleteUser"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/genero": {
+            "post": {
+                "description": "criar um novo genero",
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "description": "dados necessarios para a criacao de um novo genero",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestCreateGenero"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCreateGenero"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/genero/edit": {
+            "put": {
+                "description": "editar um genero existente",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "genero_id",
+                        "in": "query",
+                        "description": "id do genero a ser editado",
+                        "required": true,
+                        "schema": { "type": "string", "format": "uuid" }
+                    }
+                ],
+                "requestBody": {
+                    "description": "dados necessarios para a edicao do genero",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestEditGenero"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCreateGenero"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/genero/all": {
+            "get": {
+                "description": "listar todos os generos",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseGetAllGeneros"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/genero/remove": {
+            "delete": {
+                "description": "remover um genero pelo seu id",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "genero_id",
+                        "in": "query",
+                        "description": "id do genero a ser removido",
+                        "required": true,
+                        "schema": { "type": "string", "format": "uuid" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseDeleteGenero"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/serie": {
+            "post": {
+                "description": "criar uma nova serie",
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "description": "dados necessarios para a criacao de uma nova serie",
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestCreateSerie"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCreateSerie"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/serie/edit": {
+            "put": {
+                "description": "editar uma serie existente",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "serie_id",
+                        "in": "query",
+                        "description": "id da serie a ser editada",
+                        "required": true,
+                        "schema": { "type": "string", "format": "uuid" }
+                    }
+                ],
+                "requestBody": {
+                    "description": "dados necessarios para a edicao da serie",
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestEditSerie"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCreateSerie"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/serie/all": {
+            "get": {
+                "description": "listar todas as series",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseGetAllSeries"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/serie/genero": {
+            "get": {
+                "description": "listar series filtradas por genero",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "genero_id",
+                        "in": "query",
+                        "description": "id do genero para filtrar as series",
+                        "required": true,
+                        "schema": { "type": "string", "format": "uuid" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseGetAllSeries"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/serie/remove": {
+            "delete": {
+                "description": "remover uma serie pelo seu id",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "serie_id",
+                        "in": "query",
+                        "description": "id da serie a ser removida",
+                        "required": true,
+                        "schema": { "type": "string", "format": "uuid" }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseDeleteSerie"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/userSerie": {
+            "patch": {
+                "description": "criar ou atualizar o registro de uma serie para o usuario autenticado",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "serie_id",
+                        "in": "query",
+                        "description": "id da serie a ser registrada",
+                        "required": true,
+                        "schema": { "type": "string", "format": "uuid" }
+                    }
+                ],
+                "requestBody": {
+                    "description": "dados para atualizar o registro da serie do usuario",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RequestUserSerie"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseUserSerie"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/userSerie/favoritos": {
+            "get": {
+                "description": "listar as series favoritadas pelo usuario autenticado",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseListUserSerie"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/userSerie/assistidos": {
+            "get": {
+                "description": "listar as series assistidas pelo usuario autenticado",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseListUserSerie"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "RequestCreateUser": {
+                "type": "object",
+                "properties": {
+                    "nome": { "type": "string" },
+                    "email": { "type": "string" },
+                    "senha": { "type": "string" },
+                    "file": { "type": "string", "format": "binary" }
+                }
+            },
+            "ResponseCreateUser": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "string" },
+                    "nome": { "type": "string" },
+                    "email": { "type": "string" },
+                    "imagem": { "type": "string" }
+                }
+            },
+            "RequestAuthUser": {
+                "type": "object",
+                "properties": {
+                    "email": { "type": "string" },
+                    "senha": { "type": "string" }
+                }
+            },
+            "ResponseAuthUser": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "string" },
+                    "nome": { "type": "string" },
+                    "email": { "type": "string" },
+                    "token": { "type": "string" }
+                }
+            },
+            "ResponseDeleteUser": {
+                "type": "object"
+            },
+            "RequestEditUser": {
+                "type": "object",
+                "properties": {
+                    "nome": { "type": "string" },
+                    "email": { "type": "string" },
+                    "senha": { "type": "string" },
+                    "file": { "type": "string", "format": "binary" }
+                }
+            },
+            "RequestCreateGenero": {
+                "type": "object",
+                "properties": {
+                    "nome": { "type": "string" },
+                    "descricao": { "type": "string" }
+                }
+            },
+            "RequestEditGenero": {
+                "type": "object",
+                "properties": {
+                    "nome": { "type": "string" },
+                    "descricao": { "type": "string" }
+                }
+            },
+            "ResponseCreateGenero": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "string" },
+                    "nome": { "type": "string" },
+                    "descricao": { "type": "string" }
+                }
+            },
+            "ResponseGetAllGeneros": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": { "type": "string" },
+                        "nome": { "type": "string" },
+                        "descricao": { "type": "string" }
+                    }
+                }
+            },
+            "ResponseDeleteGenero": {
+                "type": "object",
+                "properties": {
+                    "message": { "type": "string" }
+                }
+            },
+            "RequestCreateSerie": {
+                "type": "object",
+                "properties": {
+                    "nome": { "type": "string" },
+                    "sinopse": { "type": "string" },
+                    "ano": { "type": "number" },
+                    "genero_id": { "type": "string" },
+                    "file": { "type": "string", "format": "binary" }
+                }
+            },
+            "RequestEditSerie": {
+                "type": "object",
+                "properties": {
+                    "nome": { "type": "string" },
+                    "sinopse": { "type": "string" },
+                    "ano": { "type": "number" },
+                    "file": { "type": "string", "format": "binary" }
+                }
+            },
+            "ResponseCreateSerie": {
+                "type": "object",
+                "properties": {
+                    "id": { "type": "string" },
+                    "nome": { "type": "string" },
+                    "sinopse": { "type": "string" },
+                    "ano": { "type": "number" },
+                    "imagem": { "type": "string" },
+                    "genero_id": { "type": "string" }
+                }
+            },
+            "ResponseGetAllSeries": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": { "type": "string" },
+                        "nome": { "type": "string" },
+                        "sinopse": { "type": "string" },
+                        "ano": { "type": "number" },
+                        "imagem": { "type": "string" },
+                        "genero_id": { "type": "string" }
+                    }
+                }
+            },
+            "ResponseDeleteSerie": {
+                "type": "object"
+            },
+            "RequestUserSerie": {
+                "type": "object",
+                "properties": {
+                    "assistido": { "type": "boolean" },
+                    "favorito": { "type": "boolean" },
+                    "nota": { "type": "number" }
+                }
+            },
+            "ResponseUserSerie": {
+                "type": "object",
+                "properties": {
+                    "assistido": { "type": "boolean" },
+                    "favorito": { "type": "boolean" },
+                    "nota": { "type": "number" }
+                }
+            },
+            "ResponseListUserSerie": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "serie": {
+                            "type": "object",
+                            "properties": {
+                                "id": { "type": "string" },
+                                "nome": { "type": "string" },
+                                "sinopse": { "type": "string" },
+                                "ano": { "type": "number" },
+                                "imagem": { "type": "string" },
+                                "genero_id": { "type": "string" }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "description": "autenticacao utilizando jwt",
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
